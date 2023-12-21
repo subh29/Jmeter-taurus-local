@@ -4,11 +4,11 @@ services:
     image: justb4/jmeter:latest
     volumes:
       - ./your-test-plan.jmx:/mnt/jmeter-example.jmx
-    command: -n -t /mnt/jmeter-example.jmx -l /mnt/results.jtl -Rjmeter-slave
+    command: jmeter -n -t /mnt/jmeter-example.jmx -l /mnt/results.jtl -Rjmeter-slave
 
   jmeter-slave:
     image: justb4/jmeter:latest
-    command: -Djava.rmi.server.hostname=jmeter-slave -Dserver.rmi.ssl.disable=true -Dserver.rmi.localport=4000 -Djava.rmi.server.port=4000 -Dserver_port=1099
+    command: jmeter -Djava.rmi.server.hostname=jmeter-slave -Dserver.rmi.ssl.disable=true -Dserver.rmi.localport=4000 -Djava.rmi.server.port=4000 -Dserver_port=1099
 
   influxdb:
     image: influxdb:latest
