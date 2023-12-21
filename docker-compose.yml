@@ -1,0 +1,29 @@
+version: '3'
+services:
+  jmeter-master:
+    image: justb4/jmeter:latest
+    volumes:
+      - ./your-test-plan.jmx:/mnt/jmeter-example.jmx
+    command: -n -t /mnt/jmeter-example.jmx -l /mnt/results.jtl -Rjmeter-slave
+
+  jmeter-slave:
+    image: justb4/jmeter:latest
+    command: -Djava.rmi.server.hostname=jmeter-slave -Dserver.rmi.ssl.disable=true -Dserver.rmi.localport=4000 -Djava.rmi.server.port=4000 -Dserver_port=1099
+
+  influxdb:
+    image: influxdb:latest
+    ports:
+      - "8086:8086"
+    environment:
+      - INFLUXDB_DB=jmeterdb
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=admin
+      - INFLUXDB_USER=user
+      - INFLUXDB_USER_PASSWORD=userpassword
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
