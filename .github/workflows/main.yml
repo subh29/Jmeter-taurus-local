@@ -1,0 +1,23 @@
+name: Performance Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  performance:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set Up Docker Compose
+      run: docker-compose up -d
+
+    - name: Run JMeter Test
+      run: docker exec -it jmeter-master jmeter -n -t /mnt/jmeter-example.jmx -l /mnt/results.jtl -Rjmeter-slave
+
+    - name: Tear Down Docker Compose
+      run: docker-compose down
