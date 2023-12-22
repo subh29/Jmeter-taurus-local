@@ -17,6 +17,8 @@ jobs:
     - name: Show Docker Compose Containers
       run: |
         docker-compose ps
+    - name: List Docker Images
+      run: docker-compose images
 
     - name: Run JMeter Test
       run: docker exec -it jmeter-taurus-local_jmeter-master_1  jmeter -n -t /mnt/Pinpoint.jmx -l /mnt/results.jtl -Rjmeter-slave
