@@ -10,6 +10,7 @@ services:
     image: justb4/jmeter:latest
     command: -Djava.rmi.server.hostname=jmeter-slave -Dserver.rmi.ssl.disable=true -Dserver.rmi.localport=4000 -Djava.rmi.server.port=4000 -Dserver_port=1099
 
+
   influxdb:
     image: influxdb:latest
     ports:
