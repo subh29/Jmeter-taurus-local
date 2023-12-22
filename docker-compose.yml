@@ -3,8 +3,8 @@ services:
   jmeter-master:
     image: justb4/jmeter:latest
     volumes:
-      - ./your-test-plan.jmx:/mnt/jmeter-example.jmx
-    command: -n -t /mnt/jmeter-example.jmx -l /mnt/results.jtl -Rjmeter-slave
+      - ./Pinpoint.jmx:/mnt/Pinpoint.jmx
+    command: -n -t /mnt/Pinpoint.jmx -l /mnt/results.jtl -Rjmeter-slave
 
   jmeter-slave:
     image: justb4/jmeter:latest
