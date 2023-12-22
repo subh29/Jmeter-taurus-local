@@ -20,6 +20,6 @@ jobs:
         docker-compose ps
 
     - name: Run JMeter Test
-      run: docker-compose exec -T jmeter-master jmeter -n -t /mnt/Pinpoint.jmx -l /mnt/results.jtl -Rjmeter-slave
+      run: docker exec -it jmeter-taurus-local_jmeter-master_1  jmeter -n -t /mnt/Pinpoint.jmx -l /mnt/results.jtl -Rjmeter-slave
     - name: Tear Down Docker Compose
       run: docker-compose down
